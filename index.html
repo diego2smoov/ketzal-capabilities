@@ -100,6 +100,103 @@
   .ref-link:hover { color: white; text-decoration: underline; }
 
   .footer-note { margin-top: 140px; padding-top: 40px; border-top: 1px solid var(--border); font-size: 13px; color: #6f6f78; text-align: center; }
+
+  /* Responsive & Mobile Optimizations */
+  @media (max-width: 768px) {
+    .nav-inner {
+      padding: 16px 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-links {
+      gap: 24px;
+      font-size: 13px;
+    }
+    .hero {
+      padding: 120px 20px 60px;
+      min-height: 72vh;
+    }
+    .hero h1 {
+      font-size: 42px;
+      line-height: 0.95;
+    }
+    .tagline {
+      font-size: 17px;
+      margin-bottom: 40px;
+    }
+    .section {
+      padding: 60px 20px;
+    }
+    .section-header h2 {
+      font-size: 28px;
+    }
+    .pillar-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .pillar h3 {
+      font-size: 24px;
+    }
+    .pillar p.lead {
+      font-size: 15.5px;
+      margin-bottom: 28px;
+    }
+    .pillar-card {
+      padding: 22px 20px;
+    }
+    .team-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .person-card {
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 20px;
+    }
+    .person-avatar {
+      width: 72px;
+      height: 72px;
+    }
+    .footer-note {
+      margin-top: 80px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 36px; }
+    .nav-links { gap: 18px; }
+  }
+
+  /* Device-specific layout modes (accessible via toggle or auto-detect) */
+  body.force-desktop .pillar-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  body.force-mobile .pillar-grid,
+  body.force-mobile .team-grid {
+    grid-template-columns: 1fr;
+  }
+  .view-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: 16px;
+  }
+  .view-toggle button {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    font-size: 11px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .view-toggle button.active {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--accent);
+  }
 </style>
 </head>
 <body>
@@ -111,6 +208,11 @@
       <li><a href="#defense">Defense &amp; Tactical</a></li>
       <li><a href="#critical">Critical Infrastructure</a></li>
     </ul>
+    <div class="view-toggle">
+      <button id="btn-auto">Auto</button>
+      <button id="btn-desktop">Desktop</button>
+      <button id="btn-mobile">Mobile</button>
+    </div>
   </div>
 </nav>
 
@@ -216,5 +318,63 @@
 
 </main>
 
+
+<script>
+function setViewMode(mode) {
+  const body = document.body;
+  body.classList.remove('force-desktop', 'force-mobile');
+  localStorage.setItem('ketzalViewMode', mode);
+
+  document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+
+  if (mode === 'desktop') {
+    body.classList.add('force-desktop');
+    document.getElementById('btn-desktop').classList.add('active');
+  } else if (mode === 'mobile') {
+    body.classList.add('force-mobile');
+    document.getElementById('btn-mobile').classList.add('active');
+  } else {
+    document.getElementById('btn-auto').classList.add('active');
+    // Auto detect
+    if (window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent)) {
+      body.classList.add('force-mobile');
+      document.getElementById('btn-mobile').classList.add('active');
+    } else {
+      document.getElementById('btn-auto').classList.add('active');
+    }
+  }
+}
+
+function initViewMode() {
+  const saved = localStorage.getItem('ketzalViewMode') || 'auto';
+  setViewMode(saved);
+
+  // Auto detect on load if auto
+  if (saved === 'auto') {
+    const isMobile = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      document.body.classList.add('force-mobile');
+    }
+  }
+
+  // Button handlers
+  document.getElementById('btn-auto').onclick = () => setViewMode('auto');
+  document.getElementById('btn-desktop').onclick = () => setViewMode('desktop');
+  document.getElementById('btn-mobile').onclick = () => setViewMode('mobile');
+
+  // Update on resize if in auto
+  window.addEventListener('resize', () => {
+    if (localStorage.getItem('ketzalViewMode') === 'auto') {
+      const body = document.body;
+      body.classList.remove('force-desktop', 'force-mobile');
+      if (window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent)) {
+        body.classList.add('force-mobile');
+      }
+    }
+  });
+}
+
+window.onload = initViewMode;
+</script>
 </body>
 </html>
