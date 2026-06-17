@@ -43,12 +43,25 @@
   .hero {
     position: relative;
     min-height: 88vh; display: flex; align-items: center; justify-content: center;
-    padding: 140px 40px 80px; text-align: center;
+    padding: 168px 40px 80px; text-align: center;
     overflow: hidden;
+    background-image: url('assets/hero-ketzal-2.jpg');
+    background-size: cover;
+    background-position: 50% 42%;
+    background-repeat: no-repeat;
+    filter: brightness(1.26);
   }
-  .hero-bg {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 1; pointer-events: none; opacity: 0.28;
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(5,5,5,0.26) 0%,
+      rgba(5,5,5,0.54) 42%,
+      rgba(5,5,5,0.72) 100%
+    );
+    z-index: 2;
   }
   .hero-content { max-width: 720px; position: relative; z-index: 3; }
   .hero h1 {
@@ -113,7 +126,7 @@
       font-size: 13px;
     }
     .hero {
-      padding: 120px 20px 60px;
+      padding: 145px 20px 60px;
       min-height: 72vh;
     }
     .hero h1 {
@@ -206,7 +219,6 @@
     <div class="logo">Ketzal</div>
     <ul class="nav-links">
       <li><a href="#defense">Defense &amp; Tactical</a></li>
-      <li><a href="#critical">Critical Infrastructure</a></li>
     </ul>
     <div class="view-toggle">
       <button id="btn-auto">Auto</button>
@@ -217,15 +229,6 @@
 </nav>
 
 <header class="hero">
-  <svg class="hero-bg" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <path d="M-120 220 Q 240 140 520 260 Q 840 380 1200 180 Q 1550 40 1720 300" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.55"/>
-    <path d="M-80 380 Q 300 310 580 430 Q 920 560 1260 340" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-opacity="0.45"/>
-    <path d="M-60 540 Q 280 470 620 590 Q 980 720 1320 490" fill="none" stroke="#ffffff" stroke-width="1.0" stroke-opacity="0.35"/>
-    <path d="M-140 700 Q 220 630 560 760 Q 900 890 1280 680" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.5"/>
-    <ellipse cx="200" cy="340" rx="170" ry="60" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.2" transform="rotate(-12 200 340)"/>
-    <ellipse cx="1180" cy="560" rx="190" ry="65" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.18" transform="rotate(-18 1180 560)"/>
-  </svg>
-
   <div class="hero-content">
     <h1>Ketzal</h1>
     <p class="tagline">From Above, Clarity</p>
@@ -266,37 +269,10 @@
     </div>
   </div>
 
-  <!-- CRITICAL INFRASTRUCTURE -->
-  <div id="critical" class="section pillar">
-    <h3>Critical Infrastructure &amp; Utility Solutions</h3>
-    <p class="lead">Delivering tech-enabled inspection, mapping, and security solutions for energy, utilities, transportation, and public-sector clients.</p>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <h4>Core Capabilities</h4>
-        <ul>
-          <li>Transmission, distribution &amp; substation inspections</li>
-          <li>LiDAR, photogrammetry &amp; digital-twin mapping</li>
-          <li>Vegetation management &amp; encroachment detection</li>
-          <li>Perimeter security and persistent surveillance</li>
-          <li>Emergency response &amp; damage assessment support</li>
-        </ul>
-      </div>
-      <div class="pillar-card">
-        <h4>Key Focus Areas</h4>
-        <ul>
-          <li>Turnkey drone programs for utilities and municipalities</li>
-          <li>Regulatory navigation &amp; FAA Part 107 training</li>
-          <li>Custom sensor integration &amp; data pipelines</li>
-          <li>Regional expansion into Central &amp; South America</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   <div class="section" style="padding-top:60px;">
     <div style="max-width:620px;margin:0 auto;">
       <p style="font-size:15px;color:#8f8f97;line-height:1.75;">
-        Ketzal is actively seeking strategic partners to accelerate deployment of sUAS, cUAS, and other robotics systems, along with drone training, sales, and infrastructure inspection. We have identified strong potential in Central and South America and are actively expanding into additional markets. We welcome conversations around acquisition support, technology integration, and go-to-market execution.
+        Ketzal is actively seeking strategic partners to accelerate deployment of sUAS, cUAS, and other robotics systems, along with drone training and sales. We have identified strong potential in Central and South America and are actively expanding into additional markets. We welcome conversations around acquisition support, technology integration, and go-to-market execution.
       </p>
     </div>
   </div>
