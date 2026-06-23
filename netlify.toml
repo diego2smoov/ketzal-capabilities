@@ -23,6 +23,11 @@
   status = 200
 
 [[redirects]]
+  from = "/terms"
+  to = "/terms-of-use.html"
+  status = 200
+
+[[redirects]]
   from = "/contact-thanks"
   to = "/contact-thanks.html"
   status = 200
