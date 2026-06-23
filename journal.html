@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketzal • Field Journal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        
+        :root {
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --text: #ededed;
+            --text-muted: #9f9fa8;
+            --accent: #b8b8c0;
+            --border: #1f1f23;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(5,5,5,0.97);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 19px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: -0.04em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+        
+        .nav-links a:hover { color: var(--text); }
+        
+        .page-header {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 140px 40px 60px;
+        }
+        
+        .page-header .eyebrow {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #8f8f95;
+            margin-bottom: 12px;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+        
+        .page-header p {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.55;
+        }
+        
+        .note {
+            max-width: 1120px;
+            margin: 0 auto 40px;
+            padding: 0 40px;
+            font-size: 13px;
+            color: #7e7e85;
+        }
+        
+        main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 40px 120px;
+        }
+        
+        .entry {
+            padding: 52px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .entry:last-child {
+            border-bottom: none;
+            padding-bottom: 20px;
+        }
+        
+        .entry-meta {
+            font-size: 11px;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: #8f8f95;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .entry h2 {
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+        
+        .entry p {
+            color: var(--text-muted);
+            font-size: 15.5px;
+            line-height: 1.72;
+            max-width: 720px;
+        }
+        
+        .entry p + p {
+            margin-top: 14px;
+        }
+        
+        .entry-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        
+        .tag {
+            font-size: 10px;
+            padding: 3px 10px;
+            border: 1px solid #2a2a30;
+            border-radius: 9999px;
+            color: #9f9fa8;
+            white-space: nowrap;
+        }
+        
+        .status {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+        
+        .status.upcoming {
+            background: #1a2a1a;
+            color: #8bc48b;
+            border: 1px solid #2a4a2a;
+        }
+        
+        .status.completed {
+            background: #1f1f23;
+            color: #9f9fa8;
+            border: 1px solid #2a2a30;
+        }
+        
+        .footer-note {
+            max-width: 720px;
+            margin: 80px auto 0;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: #6f6f78;
+            line-height: 1.6;
+        }
+        
+        footer {
+            max-width: 1120px;
+            margin: 60px auto 40px;
+            padding: 0 40px 40px;
+            font-size: 12px;
+            color: #6f6f78;
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        .cta {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--text);
+            font-size: 14px;
+            text-decoration: none;
+            border-bottom: 1px solid #3a3a40;
+            padding-bottom: 2px;
+            transition: border-color 0.2s;
+        }
+        
+        .cta:hover {
+            border-color: #6f6f78;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">KETZAL</div>
+            <ul class="nav-links">
+                <li><a href="ketzal-landing.html">Home</a></li>
+                <li><a href="Landing-Pages/Ketzal-Defense-Landing-Page.html">Defense</a></li>
+                <li><a href="journal.html">Journal</a></li>
+                <li><a href="ketzal-landing.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="page-header">
+        <div class="eyebrow">RAW NOTES • NO SLIDES</div>
+        <h1>Field Journal</h1>
+        <p>Short, direct observations from the range, the boat, and the dirt. The lessons that change how we train and how we fly next time — not the version that makes it into the brief.</p>
+    </div>
+    
+    <div class="note">
+        New dispatches added within 72 hours of each engagement. Full AARs, raw footage, and loadout details shared only with partners and customers under NDA.
+    </div>
+    
+    <main>
+        <!-- Entry 1: Miami -->
+        <div class="entry">
+            <div class="entry-meta">3–5 MAY 2026 • MIAMI, FL</div>
+            <h2>Miami Maritime RED TEAM — NCIS HUMINT + cUAS Calibration</h2>
+            <p>Simulated water-to-beach FPV attacks from a fast boat onto beachside park targets to expose gaps ahead of FIFA 2026 venues. 5-inch analog test flight confirmed the obvious in the worst possible way: standard ELRS + single-antenna video link dies in salt spray, multipath, and crowded 2.4 GHz. Pilot brought it home visual — no airframe lost. Two-man doctrine (pilot + mission coordinator) proved mandatory in real time for deconfliction and reaction.</p>
+            <p>Immediate SOP change: GPS on every airframe before it leaves the boat, digital video or Gemini diversity for anything that matters, buoyancy and RTL failsafes non-negotiable for over-water work. The cUAS systems on site got exactly the demonstration they needed — and a clear picture of what they were still blind to.</p>
+            <div class="entry-tags">
+                <span class="tag">RED TEAM</span>
+                <span class="tag">MARITIME</span>
+                <span class="tag">cUAS</span>
+                <span class="tag">NCIS</span>
+                <span class="tag status completed">COMPLETED</span>
+            </div>
+        </div>
+        
+        <!-- Entry 2: 48th ARS -->
+        <div class="entry">
+            <div class="entry-meta">ONGOING • 48th AIR RESCUE SQUADRON</div>
+            <h2>48th ARS — cUAS Requirements &amp; REDFOR Training</h2>
+            <p>Supporting cUAS requirements development and REDFOR adversary drone operations. The unit wants to understand what real Group 1–3 threats actually look like and fly like before they lock in sensor buys. We bring the platforms (K-Bober family) and the combat-informed TTPs that turn hardware into repeatable training value.</p>
+            <p>Focus is on integration into their existing exercise pipeline so the lessons survive the handoff to the next rotation — exactly the Aerorozvidka model we are trying to stand up for American forces.</p>
+            <div class="entry-tags">
+                <span class="tag">REDFOR</span>
+                <span class="tag">cUAS</span>
+                <span class="tag">TRAINING</span>
+                <span class="tag status completed">ACTIVE</span>
+            </div>
+        </div>
+        
+        <!-- Entry 3: Ecuador -->
+        <div class="entry">
+            <div class="entry-meta">2026 • ECUADOR</div>
+            <h2>Ecuadorian Special Forces — Modernization Assessment &amp; Demo</h2>
+            <p>Allied partner looking for more than another airframe pitch. They want operators who have actually employed these systems in contested environments and can help stand up a training and sustainment culture that doesn't reset every deployment cycle.</p>
+            <p>Initial capability briefs and modernization assessment delivered. Demo planning underway. The ask is the same one we hear everywhere: "Help us not reinvent this from scratch."</p>
+            <div class="entry-tags">
+                <span class="tag">LATAM</span>
+                <span class="tag">TRAINING</span>
+                <span class="tag">PARTNER</span>
+                <span class="tag status completed">ACTIVE</span>
+            </div>
+        </div>
+        
+        <!-- Entry 4: Fort Polk -->
+        <div class="entry">
+            <div class="entry-meta">2026 • FORT POLK / IPC</div>
+            <h2>Fort Polk / IPC — Bidirectional MILES Simulation Partnership</h2>
+            <p>Joint development of bidirectional MILES simulation for REDFOR/BLUFOR training at scale. Our platforms replicate realistic threat profiles; their systems train against them. The data and after-action loops run both directions into doctrine and TTP updates.</p>
+            <p>This is the closed loop that most programs are still missing — hardware + training + honest feedback that actually changes the next iteration.</p>
+            <div class="entry-tags">
+                <span class="tag">MILES</span>
+                <span class="tag">SIMULATION</span>
+                <span class="tag">JOINT</span>
+                <span class="tag status completed">ACTIVE</span>
+            </div>
+        </div>
+        
+        <!-- Entry 5: Lake Placid (Upcoming) -->
+        <div class="entry">
+            <div class="entry-meta">EARLY JUNE 2026 • LAKE PLACID, NY</div>
+            <h2>Lake Placid Drone Wars 2026 — Full Stack Stress Test</h2>
+            <p>We are not going to win a race. We are shipping the complete K-Bober + MilELRS + doctrine package (7" and 10" variants, hot-swap optics, fiber spool option, full ground support) to stress-test it in front of real pilots and real problems before we hand the stack to American units that cannot afford to learn the expensive way.</p>
+            <p>Daily pizza tracker updates on site. Full raw AAR, loadout changes, and doctrine updates within 72 hours of return. This is the first public execution of the full Ketzal story — hardware that already has 1,000+ combat users in Ukraine plus the training layer that makes it decisive.</p>
+            <div class="entry-tags">
+                <span class="tag">EVENT</span>
+                <span class="tag">STRESS TEST</span>
+                <span class="tag">K-BOBER</span>
+                <span class="tag status upcoming">UPCOMING</span>
+            </div>
+        </div>
+    </main>
+    
+    <div style="max-width:1120px; margin:0 auto; padding:0 40px;">
+        <div class="footer-note">
+            These are the real notes — the ones that usually stay in the group chat or the truck on the way home. We are publishing the version that future operators and partners can actually use.<br><br>
+            Full after-actions, raw clip packages, and partner-only materials available on request. <a href="mailto:diego@ketzaldefense.com" class="cta">diego@ketzaldefense.com</a>
+        </div>
+    </div>
+    
+    <footer>
+        Ketzal Unmanned • From Above, Clarity.<br>
+        <span style="opacity:0.5;">© 2026 Ketzal Unmanned Holdings, Inc.</span>
+    </footer>
+</body>
+</html>

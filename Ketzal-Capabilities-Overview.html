@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketzal • Capabilities Overview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+
+  :root {
+    --bg: #050505;
+    --surface: #0a0a0a;
+    --text: #ededed;
+    --text-muted: #9f9fa8;
+    --accent: #b8b8c0;
+    --border: #1f1f23;
+    --highlight: #c5c5c9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system_ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(5,5,5,0.97); backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1120px; margin: 0 auto; padding: 19px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo { font-size: 21px; font-weight: 600; letter-spacing: -0.04em; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); }
+
+  .hero {
+    position: relative;
+    min-height: 88vh; display: flex; align-items: center; justify-content: center;
+    padding: 140px 40px 80px; text-align: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1; pointer-events: none; opacity: 0.28;
+  }
+  .hero-content { max-width: 720px; position: relative; z-index: 3; }
+  .hero h1 {
+    font-size: 68px; line-height: 0.96; font-weight: 600;
+    letter-spacing: -0.05em; margin-bottom: 18px; color: white;
+  }
+  .tagline {
+    font-size: 21px; color: var(--highlight); font-weight: 400;
+    margin-bottom: 60px;
+  }
+
+  .section { max-width: 1120px; margin: 0 auto; padding: 100px 40px; }
+  .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 52px; }
+  .section-header h2 { font-size: 38px; font-weight: 600; letter-spacing: -0.03em; }
+
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px; }
+  .person-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px; padding: 32px 28px; display: flex; gap: 24px; align-items: flex-start;
+  }
+  .person-avatar {
+    width: 92px; height: 92px; border-radius: 9999px; background: #1f1f23;
+    flex-shrink: 0; border: 1px solid var(--border); overflow: hidden;
+  }
+  .person-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .person-info h3 { font-size: 21px; margin-bottom: 4px; }
+  .person-info .role { color: var(--accent); font-size: 14px; font-weight: 500; margin-bottom: 14px; }
+  .person-info p { color: var(--text-muted); font-size: 14.5px; margin-bottom: 18px; }
+  .linkedin-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #0a0a0a; color: var(--text); font-size: 13px; font-weight: 500;
+    padding: 9px 18px; border-radius: 9999px; text-decoration: none; border: 1px solid var(--border);
+  }
+  .linkedin-btn:hover { background: #111; }
+
+  .pillar { border-top: 1px solid var(--border); padding-top: 90px; margin-top: 40px; }
+  .pillar:first-of-type { margin-top: 0; border-top: none; padding-top: 0; }
+  .pillar h3 { font-size: 28px; font-weight: 600; letter-spacing: -0.025em; margin-bottom: 12px; }
+  .pillar p.lead { font-size: 17px; color: var(--highlight); max-width: 620px; margin-bottom: 40px; }
+
+  .pillar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 30px; }
+  .pillar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px 26px; }
+  .pillar-card h4 { font-size: 17px; font-weight: 600; margin-bottom: 12px; color: white; }
+  .pillar-card ul { list-style: none; padding: 0; margin: 0; }
+  .pillar-card ul li { font-size: 14.5px; color: var(--text-muted); padding: 6px 0; border-top: 1px solid var(--border); }
+  .pillar-card ul li:first-child { border-top: none; }
+
+  .ref-link { font-size: 14px; color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; }
+  .ref-link:hover { color: white; text-decoration: underline; }
+
+  .footer-note { margin-top: 140px; padding-top: 40px; border-top: 1px solid var(--border); font-size: 13px; color: #6f6f78; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Ketzal</div>
+    <ul class="nav-links">
+      <li><a href="#team">Team</a></li>
+      <li><a href="#defense">Defense &amp; Tactical</a></li>
+      <li><a href="#critical">Critical Infrastructure</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="hero-bg" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path d="M-120 220 Q 240 140 520 260 Q 840 380 1200 180 Q 1550 40 1720 300" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.55"/>
+    <path d="M-80 380 Q 300 310 580 430 Q 920 560 1260 340" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-opacity="0.45"/>
+    <path d="M-60 540 Q 280 470 620 590 Q 980 720 1320 490" fill="none" stroke="#ffffff" stroke-width="1.0" stroke-opacity="0.35"/>
+    <path d="M-140 700 Q 220 630 560 760 Q 900 890 1280 680" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.5"/>
+    <ellipse cx="200" cy="340" rx="170" ry="60" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.2" transform="rotate(-12 200 340)"/>
+    <ellipse cx="1180" cy="560" rx="190" ry="65" fill="none" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.18" transform="rotate(-18 1180 560)"/>
+  </svg>
+
+  <div class="hero-content">
+    <h1>Ketzal</h1>
+    <p class="tagline">From Above, Clarity</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- TEAM SECTION -->
+  <div id="team" class="section">
+    <div class="section-header"><h2>Team</h2></div>
+    <div class="team-grid">
+      <div class="person-card">
+        <div class="person-avatar">
+          <img src="https://via.placeholder.com/92?text=DC" alt="Diego Casillas">
+        </div>
+        <div class="person-info">
+          <h3>Diego Casillas</h3>
+          <div class="role">Founder &amp; Strategic Lead</div>
+          <p>Leads Ketzal’s vision across defense and critical infrastructure. Brings deep experience in autonomous systems, red-teaming operations, and regional market development in Latin America.</p>
+          <a href="https://www.linkedin.com/in/diego-casillas-/" target="_blank" class="linkedin-btn">LinkedIn</a>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="person-avatar">
+          <img src="https://via.placeholder.com/92?text=NR" alt="Noah Ruiz">
+        </div>
+        <div class="person-info">
+          <h3>Noah Ruiz</h3>
+          <div class="role">Technical &amp; Operations Lead</div>
+          <p>Drives engineering execution and field operations. Oversees drone integration programs, cUAS evaluations, and training curriculum for both defense and infrastructure clients.</p>
+          <a href="https://www.linkedin.com/in/noah-ruiz-skynetwest/" target="_blank" class="linkedin-btn">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEFENSE & TACTICAL -->
+  <div id="defense" class="section pillar">
+    <h3>Defense &amp; Tactical Operations</h3>
+    <p class="lead">Supporting government, aerospace, and special-operations stakeholders with advanced unmanned systems, red-teaming, and training.</p>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <h4>Core Capabilities</h4>
+        <ul>
+          <li>Red-teaming &amp; adversarial drone operations</li>
+          <li>cUAS detection, tracking, and defeat integration</li>
+          <li>Tactical ISR and autonomous flight programs</li>
+          <li>Counter-drone training &amp; curriculum development</li>
+          <li>Drone-for-defense logistics and sustainment</li>
+        </ul>
+      </div>
+      <div class="pillar-card">
+        <h4>Key Focus Areas</h4>
+        <ul>
+          <li>Partnerships with U.S. Air Force and allied programs</li>
+          <li>Integration of Ukrainian-proven technologies (AE K-Bober systems)</li>
+          <li>Autonomous engineering collaboration – <a href="https://aernd.ua/products" target="_blank" class="ref-link">aernd.ua/products</a></li>
+          <li>Field trials, exercises, and foreign-partner engagement</li>
+        </ul>
+        <div style="margin-top:16px;font-size:13px;color:#6f6f78;">
+          K-Bober brochure available upon request (AE FPV &amp; tactical VTX systems)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITICAL INFRASTRUCTURE -->
+  <div id="critical" class="section pillar">
+    <h3>Critical Infrastructure &amp; Utility Solutions</h3>
+    <p class="lead">Delivering drone-enabled inspection, mapping, and security solutions for energy, utilities, transportation, and public-sector clients.</p>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <h4>Core Capabilities</h4>
+        <ul>
+          <li>Transmission, distribution &amp; substation inspections</li>
+          <li>LiDAR, photogrammetry &amp; digital-twin mapping</li>
+          <li>Vegetation management &amp; encroachment detection</li>
+          <li>Perimeter security and persistent surveillance</li>
+          <li>Emergency response &amp; damage assessment support</li>
+        </ul>
+      </div>
+      <div class="pillar-card">
+        <h4>Key Focus Areas</h4>
+        <ul>
+          <li>Turnkey drone programs for utilities and municipalities</li>
+          <li>Regulatory navigation &amp; FAA Part 107 / Part 21 training</li>
+          <li>Custom sensor integration &amp; data pipelines</li>
+          <li>Regional expansion into Central &amp; South America</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:60px;">
+    <div style="max-width:620px;margin:0 auto;">
+      <p style="font-size:15px;color:#8f8f97;line-height:1.75;">
+        Ketzal is actively seeking strategic partners to accelerate deployment of counter-UAS, drone training, sales, and infrastructure inspection programs across Central and South America. We welcome conversations around acquisition support, technology integration, and regional go-to-market execution.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Ketzal Group • Confidential Partnership Brief • May 2026
+  </div>
+
+</main>
+
+</body>
+</html>
