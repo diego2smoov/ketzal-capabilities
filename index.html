@@ -30,6 +30,21 @@
       color: #ededed;
       border-color: #006865;
     }
+    .form-input {
+      width: 100%;
+      background-color: #0a0a0a;
+      border: 1px solid #1f1f23;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #ededed;
+      font-size: 0.9375rem;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #006865;
+    }
+    .form-input::placeholder { color: #6f6f78; }
   </style>
 </head>
 <body>
@@ -183,27 +198,72 @@
 
   <!-- Contact -->
   <section id="contact" class="py-16 md:py-20 border-t border-[#1f1f23]">
-    <div class="max-w-xl mx-auto px-5 text-center">
-      <h2 class="section-header mb-4">Let’s Talk</h2>
-      <p class="text-[#9f9fa8] mb-8">Whether you’re looking for partnership, training, or capability development, we’re ready to listen.</p>
+    <div class="max-w-4xl mx-auto px-5">
+      <div class="text-center mb-10">
+        <h2 class="section-header mb-4">Let’s Talk</h2>
+        <p class="text-[#9f9fa8] max-w-xl mx-auto">Whether you’re looking for partnership, training, or capability development, we’re ready to listen.</p>
+      </div>
 
-      <div class="space-y-4 text-left max-w-md mx-auto">
-        <a href="https://www.linkedin.com/in/diego-casillas-/" target="_blank"
-           class="flex items-center gap-4 bg-[#0a0a0a] hover:bg-[#1f1f23] border border-[#1f1f23] p-4 rounded-2xl transition-colors">
-          <i class="fa-brands fa-linkedin text-2xl text-[#006865]"></i>
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <form name="contact" method="POST" action="/contact-thanks.html" data-netlify="true" data-netlify-honeypot="bot-field" class="text-left space-y-4">
+          <input type="hidden" name="form-name" value="contact">
+
+          <p class="hidden">
+            <label>Don’t fill this out: <input name="bot-field"></label>
+          </p>
+
           <div>
-            <div class="font-medium">Diego Casillas</div>
-            <div class="text-sm text-[#9f9fa8]">Founder</div>
+            <label for="name" class="block text-sm font-medium text-[#c5c5c9] mb-1.5">Name <span class="text-[#c53030]">*</span></label>
+            <input type="text" id="name" name="name" required class="form-input" placeholder="Your name" autocomplete="name">
           </div>
-        </a>
-        <a href="https://www.linkedin.com/in/noah-ruiz-skynetwest/" target="_blank"
-           class="flex items-center gap-4 bg-[#0a0a0a] hover:bg-[#1f1f23] border border-[#1f1f23] p-4 rounded-2xl transition-colors">
-          <i class="fa-brands fa-linkedin text-2xl text-[#006865]"></i>
+
           <div>
-            <div class="font-medium">Noah Ruiz</div>
-            <div class="text-sm text-[#9f9fa8]">President</div>
+            <label for="email" class="block text-sm font-medium text-[#c5c5c9] mb-1.5">Email <span class="text-[#c53030]">*</span></label>
+            <input type="email" id="email" name="email" required class="form-input" placeholder="you@organization.com" autocomplete="email">
           </div>
-        </a>
+
+          <div>
+            <label for="organization" class="block text-sm font-medium text-[#c5c5c9] mb-1.5">Organization</label>
+            <input type="text" id="organization" name="organization" class="form-input" placeholder="Company or unit" autocomplete="organization">
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-[#c5c5c9] mb-1.5">Message <span class="text-[#c53030]">*</span></label>
+            <textarea id="message" name="message" required rows="5" class="form-input resize-y min-h-[120px]" placeholder="Tell us about your mission or inquiry"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary w-full py-3.5 text-sm font-semibold rounded-full">
+            Send Message
+          </button>
+        </form>
+
+        <div class="space-y-4">
+          <p class="text-sm text-[#9f9fa8] mb-2">Prefer to connect directly?</p>
+          <a href="https://www.linkedin.com/in/diego-casillas-/" target="_blank" rel="noopener noreferrer"
+             class="flex items-center gap-4 bg-[#0a0a0a] hover:bg-[#1f1f23] border border-[#1f1f23] p-4 rounded-2xl transition-colors">
+            <i class="fa-brands fa-linkedin text-2xl text-[#006865]"></i>
+            <div>
+              <div class="font-medium">Diego Casillas</div>
+              <div class="text-sm text-[#9f9fa8]">Founder</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/noah-ruiz-skynetwest/" target="_blank" rel="noopener noreferrer"
+             class="flex items-center gap-4 bg-[#0a0a0a] hover:bg-[#1f1f23] border border-[#1f1f23] p-4 rounded-2xl transition-colors">
+            <i class="fa-brands fa-linkedin text-2xl text-[#006865]"></i>
+            <div>
+              <div class="font-medium">Noah Ruiz</div>
+              <div class="text-sm text-[#9f9fa8]">President</div>
+            </div>
+          </a>
+          <a href="mailto:info@ketzalunmanned.com"
+             class="flex items-center gap-4 bg-[#0a0a0a] hover:bg-[#1f1f23] border border-[#1f1f23] p-4 rounded-2xl transition-colors">
+            <i class="fa-solid fa-envelope text-2xl text-[#006865]"></i>
+            <div>
+              <div class="font-medium">info@ketzalunmanned.com</div>
+              <div class="text-sm text-[#9f9fa8]">General inquiries</div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </section>

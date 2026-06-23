@@ -22,6 +22,11 @@
   to = "/privacy-policy.html"
   status = 200
 
+[[redirects]]
+  from = "/contact-thanks"
+  to = "/contact-thanks.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
