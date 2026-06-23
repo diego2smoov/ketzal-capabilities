@@ -1,370 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ketzal • From Above, Clarity</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-        
-        :root {
-            --bg: #050505;
-            --surface: #0a0a0a;
-            --text: #ededed;
-            --text-muted: #9f9fa8;
-            --accent: #b8b8c0;
-            --border: #1f1f23;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', system_ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            background: rgba(5,5,5,0.97);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .nav-inner {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 19px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 21px;
-            font-weight: 600;
-            letter-spacing: -0.04em;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.15s ease;
-        }
-        
-        .nav-links a:hover { color: var(--text); }
-
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('assets/hero-refined-v2.png');
-            background-size: cover;
-            background-position: center 49%;
-            background-repeat: no-repeat;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(5,5,5,0.32) 0%,
-                rgba(5,5,5,0.58) 38%,
-                rgba(5,5,5,0.86) 76%
-            );
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 680px;
-            padding: 0 40px;
-            text-align: center;
-        }
-        
-        .hero-logo {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            opacity: 0.65;
-            margin-bottom: 26px;
-        }
-        
-        .hero h1 {
-            font-size: 68px;
-            line-height: 0.96;
-            font-weight: 600;
-            letter-spacing: -0.05em;
-            margin-bottom: 26px;
-            color: white;
-        }
-        
-        .hero p {
-            font-size: 19px;
-            color: #c5c5c9;
-            max-width: 420px;
-            margin: 0 auto 42px;
-            font-weight: 400;
-        }
-        
-        .cta-button {
-            background: white;
-            color: #050505;
-            font-weight: 600;
-            padding: 16px 42px;
-            font-size: 14px;
-            border: none;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
-        }
-        
-        .section {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 110px 40px;
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            margin-bottom: 52px;
-        }
-        
-        .section-header h2 {
-            font-size: 38px;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-        }
-        
-        .pillar-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 22px;
-        }
-        
-        .pillar-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 40px 34px;
-            transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), 
-                        border-color 0.2s ease;
-        }
-        
-        .pillar-card:hover {
-            transform: translateY(-3px);
-            border-color: #2a2a30;
-        }
-        
-        .pillar-card h3 {
-            font-size: 23px;
-            margin-bottom: 11px;
-            font-weight: 600;
-        }
-        
-        .pillar-card p {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.68;
-            margin-bottom: 26px;
-        }
-        
-        .pillar-meta {
-            font-size: 11px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: #8f8f95;
-            font-weight: 600;
-        }
-        
-        .capabilities {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 38px;
-            margin-top: 54px;
-        }
-        
-        .cap-item {
-            border-left: 1.5px solid #2a2a30;
-            padding-left: 22px;
-        }
-        
-        .cap-item h4 {
-            font-size: 15.5px;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .cap-item p {
-            font-size: 14.5px;
-            color: var(--text-muted);
-        }
-        
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 64px 0 48px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 13px;
-            line-height: 1.9;
-        }
-        
-        .subtle { opacity: 0.7; }
-        
-        .scroll-cue {
-            position: absolute;
-            bottom: 48px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            letter-spacing: 1px;
-            color: #6f6f73;
-            opacity: 0.7;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ketzal Unmanned | Defense & Tactical Unmanned Systems</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background-color: #050505; color: #ededed; font-family: system-ui, -apple-system, sans-serif; }
+    .section-header { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.03em; }
+    .nav-link { transition: color 0.2s ease; }
+    .nav-link:hover { color: #006865; }
+    .division-card { background-color: #0a0a0a; border: 1px solid #1f1f23; transition: all 0.3s ease; }
+    .division-card:hover { border-color: #006865; transform: translateY(-2px); }
+    .btn-primary { background-color: #006865; color: white; }
+    .btn-primary:hover { background-color: #00524f; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .view-toggle button {
+      background: transparent;
+      border: 1px solid #1f1f23;
+      color: #9f9fa8;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .view-toggle button.active {
+      background: #1f1f23;
+      color: #ededed;
+      border-color: #006865;
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-inner">
-            <div class="logo">KETZAL</div>
-            <ul class="nav-links">
-                <li><a href="#pillars">Work</a></li>
-                <li><a href="journal.html">Journal</a></li>
-                <li><a href="#capabilities">Approach</a></li>
-                <li><a href="#contact">Contact</a></li>
+
+  <!-- Navbar -->
+  <nav class="bg-[#050505] border-b border-[#1f1f23] sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl font-semibold tracking-tight">KETZAL</span>
+      </div>
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-[#9f9fa8]">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+
+        <!-- Capabilities Dropdown -->
+        <div class="relative dropdown">
+          <a href="#capabilities" class="nav-link flex items-center gap-1">
+            Capabilities <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
+          </a>
+          <div class="dropdown-menu hidden absolute mt-2 w-56 bg-[#0a0a0a] border border-[#1f1f23] rounded-xl shadow-lg py-2 text-sm">
+            <a href="#defense" class="block px-5 py-2 hover:bg-[#1f1f23]">Defense</a>
+            <a href="#offense" class="block px-5 py-2 hover:bg-[#1f1f23]">Offense</a>
+            <a href="#support" class="block px-5 py-2 hover:bg-[#1f1f23]">Support & Innovation</a>
+          </div>
+        </div>
+
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="view-toggle hidden md:flex">
+          <button id="btn-auto" class="active">Auto</button>
+          <button id="btn-desktop">Desktop</button>
+          <button id="btn-mobile">Mobile</button>
+        </div>
+
+        <div class="hidden md:flex items-center gap-3">
+          <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })"
+                  class="px-5 py-2.5 text-sm font-medium rounded-full border border-[#1f1f23] hover:bg-[#1f1f23]">
+            Engage
+          </button>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden text-xl text-[#9f9fa8]">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#050505] border-t border-[#1f1f23] px-5 py-6">
+      <div class="flex flex-col gap-4 text-sm font-medium text-[#9f9fa8]">
+        <a href="#home" class="nav-link py-1">Home</a>
+        <a href="#about" class="nav-link py-1">About</a>
+        <a href="#defense" class="nav-link py-1">Defense</a>
+        <a href="#offense" class="nav-link py-1">Offense</a>
+        <a href="#support" class="nav-link py-1">Support & Innovation</a>
+        <a href="#capabilities" class="nav-link py-1">Capabilities</a>
+        <a href="#contact" class="nav-link py-1">Contact</a>
+
+        <div class="pt-4 border-t border-[#1f1f23] flex flex-col gap-3">
+          <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').classList.add('hidden')"
+                  class="py-3 border border-[#1f1f23] rounded-full">Engage With Us</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="min-h-[100dvh] flex items-center relative overflow-hidden"
+           style="background-image: linear-gradient(rgba(5,5,5,0.78), rgba(5,5,5,0.88)), url('https://picsum.photos/id/1018/2000/1200');
+                  background-size: cover; background-position: center;">
+
+    <div class="absolute inset-0 pointer-events-none"
+         style="background-image: linear-gradient(rgba(0, 104, 101, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 104, 101, 0.12) 1px, transparent 1px);
+                background-size: 55px 55px;">
+    </div>
+
+    <div class="max-w-5xl mx-auto px-5 text-center pt-16 relative z-10">
+      <div class="inline-block px-4 py-1.5 rounded-full border border-[#006865]/40 text-[#006865] text-sm mb-6 tracking-widest">
+        VETERAN-LED • CHANDLER, ARIZONA
+      </div>
+
+      <h1 class="text-[2.6rem] md:text-6xl lg:text-7xl font-semibold tracking-[-2.5px] leading-[1.05] mb-6 text-white">
+        From Above, Clarity.
+      </h1>
+
+      <p class="max-w-xl mx-auto text-lg md:text-xl text-[#c5c5c9] mb-10">
+        Veteran-led. Operator-focused. Built with common sense for those who serve.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#capabilities" class="btn-primary px-8 py-4 text-lg font-semibold rounded-full">Explore Capabilities</a>
+        <a href="#contact" class="border border-white px-8 py-4 text-lg font-semibold rounded-full hover:bg-white hover:text-black">Engage With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="py-16 border-b border-[#1f1f23]">
+    <div class="max-w-4xl mx-auto px-5 text-center">
+      <p class="text-xl md:text-2xl italic text-[#c5c5c9]">
+        “Ketzal develops and deploys unmanned systems that protect lives, empower operators,
+        and deliver decisive tactical advantage — always putting people first with responsible,
+        common-sense technology built for those who serve.”
+      </p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="max-w-5xl mx-auto px-5 py-16 md:py-20">
+    <div class="grid md:grid-cols-12 gap-x-12 items-center">
+      <div class="md:col-span-5">
+        <span class="text-[#006865] text-sm tracking-[3px]">WHO WE ARE</span>
+        <h2 class="section-header mt-3">Built by Operators,<br>for Operators</h2>
+      </div>
+      <div class="md:col-span-7 mt-8 md:mt-0 text-lg text-[#9f9fa8] space-y-6">
+        <p>Ketzal Unmanned is an operator-focused, veteran-led company founded by those who understand what it means to operate in contested environments. We reject over-engineered solutions in favor of practical, reliable systems that work when it matters most.</p>
+        <p>We build with one filter: <span class="font-semibold text-white">Does this put people first and use common sense?</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divisions -->
+  <section class="max-w-7xl mx-auto px-5 pb-16 md:pb-20">
+    <div class="text-center mb-10 md:mb-12">
+      <span class="text-[#006865] text-sm tracking-[3px]">OUR DIVISIONS</span>
+      <h2 class="section-header mt-3">Purpose-Built for the Mission</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Defense -->
+      <div id="defense" class="division-card p-7 md:p-8 rounded-2xl">
+        <h3 class="text-3xl font-semibold mb-4">Ketzal Defense</h3>
+        <p class="text-[#9f9fa8] mb-6">Threat awareness, protection, and electronic warfare systems designed to keep operators and assets safe.</p>
+        <ul class="space-y-3 text-sm text-[#9f9fa8]">
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#006865] mt-1 w-4"></i> cUAS detection, tracking, and defeat</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#006865] mt-1 w-4"></i> Electronic warfare and payload integration</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#006865] mt-1 w-4"></i> Tactical ISR and autonomous systems</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#006865] mt-1 w-4"></i> Counter-drone training programs</li>
+        </ul>
+      </div>
+
+      <!-- Offense -->
+      <div id="offense" class="division-card p-7 md:p-8 rounded-2xl">
+        <h3 class="text-3xl font-semibold mb-4">Ketzal Offense</h3>
+        <p class="text-[#9f9fa8] mb-6">Aggressive, mission-focused platforms and elite training that give operators the edge.</p>
+        <ul class="space-y-3 text-sm text-[#9f9fa8]">
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#c53030] mt-1 w-4"></i> K-Bober FPV and tactical VTX systems</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#c53030] mt-1 w-4"></i> Mothership platforms</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#c53030] mt-1 w-4"></i> Loitering munitions</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-[#c53030] mt-1 w-4"></i> Red team / OPFOR training</li>
+        </ul>
+      </div>
+
+      <!-- Support & Innovation -->
+      <div id="support" class="division-card p-7 md:p-8 rounded-2xl md:col-span-2">
+        <h3 class="text-3xl font-semibold mb-4">Ketzal Support & Innovation</h3>
+        <p class="text-[#9f9fa8] mb-6">The foundation that enables all divisions through sustainment, logistics, and continuous R&D.</p>
+        <div class="grid md:grid-cols-2 gap-6 text-sm text-[#9f9fa8]">
+          <div>
+            <h4 class="font-semibold text-white mb-2">Support</h4>
+            <ul class="space-y-2">
+              <li>• Custom mission batteries & power systems</li>
+              <li>• Field logistics and rapid deployment kits</li>
+              <li>• Ground control and shared platform support</li>
             </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-white mb-2">Innovation</h4>
+            <ul class="space-y-2">
+              <li>• Next-generation unmanned systems & payloads</li>
+              <li>• Dual-use technology development</li>
+              <li>• Cross-division R&D and partner integration</li>
+            </ul>
+          </div>
         </div>
-    </nav>
-    
-    <header class="hero" id="top">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-logo">UNMANNED SYSTEMS</div>
-            <h1>From Above,<br>Clarity.</h1>
-            <p>Precision unmanned systems that deliver decisive information in defense and industry.</p>
-            <a href="#pillars" class="cta-button">Explore our work</a>
-        </div>
-        <div class="scroll-cue">SCROLL TO BEGIN</div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <section class="section" id="pillars">
-        <div class="section-header">
-            <h2>Two domains.<br>One standard.</h2>
-        </div>
-        
-        <div class="pillar-grid">
-            <div class="pillar-card">
-                <div class="pillar-meta">DEFENSE &amp; SECURITY</div>
-                <h3>Strategic unmanned operations</h3>
-                <p>Advanced autonomous platforms supporting national security and critical infrastructure. Secure Group 1–3 UAS operations, counter-UAS systems, and resilient beyond-visual-line-of-sight missions.</p>
-                <div class="subtle">
-                    <small>MilELRS • C-sUAS • Secure Autonomy</small>
-                </div>
-            </div>
-            
-            <div class="pillar-card">
-                <div class="pillar-meta">INDUSTRIAL INSPECTIONS</div>
-                <h3>Robotic nondestructive testing</h3>
-                <p>High-resolution aerial NDT and detailed asset inspection for energy, refining, infrastructure and heavy industry. Decades of combined inspection expertise now under one platform.</p>
-                <div class="subtle">
-                    <small>Ultrasonic • Magnetic Particle • Visual • Photogrammetry</small>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Products & Capabilities -->
+  <section id="capabilities" class="py-16 md:py-20 border-y border-[#1f1f23]">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="text-center mb-10 md:mb-12">
+        <span class="text-[#006865] text-sm tracking-[3px]">PRODUCTS &amp; CAPABILITIES</span>
+        <h2 class="section-header mt-3">Field-Ready Systems</h2>
+      </div>
 
-    <section class="section" id="capabilities" style="background: var(--surface); border-radius: 20px; margin: 40px auto; padding: 90px 70px;">
-        <div style="max-width: 720px;">
-            <div style="text-transform: uppercase; letter-spacing: 1.6px; font-size: 11px; color: #7e7e85; margin-bottom: 14px;">
-                APPROACH
-            </div>
-            <h2 style="font-size: 34px; line-height: 1.05; margin-bottom: 36px;">Built for environments where failure is not an option.</h2>
-            
-            <div class="capabilities">
-                <div class="cap-item">
-                    <h4>Hardware &amp; Autonomy Control</h4>
-                    <p>Full-stack ownership of flight systems, firmware, and sensor integration with zero foreign dependency.</p>
-                </div>
-                <div class="cap-item">
-                    <h4>Operational Excellence</h4>
-                    <p>Procedures and flight reliability refined over thousands of hours in complex, high-value environments.</p>
-                </div>
-                <div class="cap-item">
-                    <h4>Clarity from Data</h4>
-                    <p>From acquisition to final report, we remove noise between the sensor and the decision.</p>
-                </div>
-            </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-[#0a0a0a] border border-[#1f1f23] p-7 md:p-8 rounded-2xl">
+          <h4 class="font-semibold text-xl mb-3">K-Bober Systems</h4>
+          <p class="text-[#9f9fa8] text-sm">Tactical FPV platforms and VTX systems with Picatinny rail attachments.</p>
         </div>
-    </section>
-
-    <section class="section" id="contact" style="padding-top: 60px; padding-bottom: 110px;">
-        <div style="text-align: center; max-width: 460px; margin: 0 auto;">
-            <h2 style="font-size: 27px; margin-bottom: 17px;">Let’s talk missions.</h2>
-            <p style="color: var(--text-muted); margin-bottom: 38px;">
-                We partner with defense organizations and industrial operators who demand uncompromising clarity.
-            </p>
-            <a href="mailto:team@ketzalunmanned.com" class="cta-button" style="background: #18181c; color: white; border: 1px solid #2c2c31;">
-                Start a conversation →
-            </a>
+        <div class="bg-[#0a0a0a] border border-[#1f1f23] p-7 md:p-8 rounded-2xl">
+          <h4 class="font-semibold text-xl mb-3">Mothership Platforms</h4>
+          <p class="text-[#9f9fa8] text-sm">Multi-role carrier systems enabling extended range and payload delivery.</p>
         </div>
-    </section>
+        <div class="bg-[#0a0a0a] border border-[#1f1f23] p-7 md:p-8 rounded-2xl">
+          <h4 class="font-semibold text-xl mb-3">Loitering Munitions</h4>
+          <p class="text-[#9f9fa8] text-sm">Precision-guided systems with operator-in-the-loop control.</p>
+        </div>
+        <div class="bg-[#0a0a0a] border border-[#1f1f23] p-7 md:p-8 rounded-2xl">
+          <h4 class="font-semibold text-xl mb-3">Dropper Mechanisms</h4>
+          <p class="text-[#9f9fa8] text-sm">Reliable payload release systems for precision delivery.</p>
+        </div>
+        <div class="bg-[#0a0a0a] border border-[#1f1f23] p-7 md:p-8 rounded-2xl">
+          <h4 class="font-semibold text-xl mb-3">Proximity Sensors</h4>
+          <p class="text-[#9f9fa8] text-sm">Advanced detection systems for obstacle avoidance and targeting.</p>
+        </div>
+        <div class="bg-[#0a0a0a] border border-[#1f1f23] p-7 md:p-8 rounded-2xl">
+          <h4 class="font-semibold text-xl mb-3">Battery Packs</h4>
+          <p class="text-[#9f9fa8] text-sm">High-capacity, field-replaceable battery systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        Ketzal Unmanned • From above, clarity.<br>
-        <span style="opacity: 0.35; font-size: 12px;">© 2026 Ketzal Unmanned</span>
-    </footer>
+  <!-- Contact -->
+  <section id="contact" class="py-16 md:py-20 border-t border-[#1f1f23]">
+    <div class="max-w-xl mx-auto px-5 text-center">
+      <h2 class="section-header mb-4">Let’s Talk</h2>
+      <p class="text-[#9f9fa8] mb-8">Whether you’re looking for partnership, training, or capability development, we’re ready to listen.</p>
 
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    const navHeight = 70;
-                    const y = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
-                }
-            });
-        });
-        
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            nav.style.background = window.scrollY > 55 
-                ? 'rgba(5,5,5,0.985)' 
-                : 'rgba(5,5,5,0.97)';
-        });
-    </script>
+      <div class="space-y-4 text-left max-w-md mx-auto">
+        <a href="https://www.linkedin.com/in/diego-casillas-/" target="_blank"
+           class="flex items-center gap-4 bg-[#0a0a0a] hover:bg-[#1f1f23] border border-[#1f1f23] p-4 rounded-2xl transition-colors">
+          <i class="fa-brands fa-linkedin text-2xl text-[#006865]"></i>
+          <div>
+            <div class="font-medium">Diego Casillas</div>
+            <div class="text-sm text-[#9f9fa8]">Founder</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/noah-ruiz-skynetwest/" target="_blank"
+           class="flex items-center gap-4 bg-[#0a0a0a] hover:bg-[#1f1f23] border border-[#1f1f23] p-4 rounded-2xl transition-colors">
+          <i class="fa-brands fa-linkedin text-2xl text-[#006865]"></i>
+          <div>
+            <div class="font-medium">Noah Ruiz</div>
+            <div class="text-sm text-[#9f9fa8]">President</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#050505] py-10 text-center text-sm text-[#6f6f78] border-t border-[#1f1f23]">
+    <div class="max-w-7xl mx-auto px-5">
+      <p>© 2026 Ketzal Unmanned • Chandler, Arizona</p>
+      <p class="mt-1">People First. Common Sense. Built for those who serve.</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    function setViewMode(mode) {
+      const body = document.body;
+      body.classList.remove('force-desktop', 'force-mobile');
+      localStorage.setItem('ketzalViewMode', mode);
+
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+
+      if (mode === 'desktop') {
+        body.classList.add('force-desktop');
+        document.getElementById('btn-desktop').classList.add('active');
+      } else if (mode === 'mobile') {
+        body.classList.add('force-mobile');
+        document.getElementById('btn-mobile').classList.add('active');
+      } else {
+        document.getElementById('btn-auto').classList.add('active');
+      }
+    }
+
+    function initViewMode() {
+      const saved = localStorage.getItem('ketzalViewMode') || 'auto';
+      setViewMode(saved);
+
+      document.getElementById('btn-auto').onclick = () => setViewMode('auto');
+      document.getElementById('btn-desktop').onclick = () => setViewMode('desktop');
+      document.getElementById('btn-mobile').onclick = () => setViewMode('mobile');
+    }
+
+    window.onload = initViewMode;
+  </script>
+
 </body>
 </html>
