@@ -4,7 +4,12 @@
 
 [[redirects]]
   from = "/capabilities"
-  to = "/index.html"
+  to = "/index-capabilities.html"
+  status = 200
+
+[[redirects]]
+  from = "/production"
+  to = "/index-capabilities.html"
   status = 200
 
 [[redirects]]
