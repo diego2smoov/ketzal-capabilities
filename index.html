@@ -205,12 +205,11 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-10 items-start">
-        <form name="contact" method="POST" netlify netlify-honeypot="bot-field" class="text-left space-y-4">
-          <input type="hidden" name="form-name" value="contact">
-
-          <p class="hidden">
-            <label>Don’t fill this out: <input name="bot-field"></label>
-          </p>
+        <form name="contact" method="POST" action="https://formsubmit.co/info@ketzalunmanned.com" class="text-left space-y-4">
+          <input type="hidden" name="_next" value="https://ketzalunmanned.com/contact-thanks">
+          <input type="hidden" name="_subject" value="New inquiry from ketzalunmanned.com">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
 
           <div>
             <label for="name" class="block text-sm font-medium text-[#c5c5c9] mb-1.5">Name <span class="text-[#c53030]">*</span></label>
@@ -280,14 +279,6 @@
     </div>
   </footer>
 
-  <!-- Netlify build-time form detection -->
-  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-    <input type="text" name="name">
-    <input type="email" name="email">
-    <input type="text" name="organization">
-    <textarea name="message"></textarea>
-  </form>
-
   <script>
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -327,35 +318,6 @@
       document.getElementById('btn-auto').onclick = () => setViewMode('auto');
       document.getElementById('btn-desktop').onclick = () => setViewMode('desktop');
       document.getElementById('btn-mobile').onclick = () => setViewMode('mobile');
-    }
-
-    const contactForm = document.querySelector('form[name="contact"]:not([hidden])');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const btn = contactForm.querySelector('button[type="submit"]');
-        const originalText = btn.textContent;
-        btn.disabled = true;
-        btn.textContent = 'Sending…';
-
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(contactForm)).toString()
-        })
-          .then(res => {
-            if (res.ok) {
-              window.location.href = '/contact-thanks';
-            } else {
-              throw new Error('Submission failed');
-            }
-          })
-          .catch(() => {
-            btn.disabled = false;
-            btn.textContent = originalText;
-            alert('Something went wrong. Please email info@ketzalunmanned.com directly.');
-          });
-      });
     }
 
     window.onload = initViewMode;
